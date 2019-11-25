@@ -4,13 +4,14 @@ title: "Setting up OpenVAS in Master and Slave Architecture"
 
 # Setting up OpenVAS in Master/Slave Architecture
 
-OpenVAS is a open source vulnerability scanner. In single instances, the OpenVAS
-package will install all the components required to successfully scan a network.
-But, some of those packages are resource intensive and difficult to run on older
-hardware. The current approach at New Mexico Institute of Mining and Technology
-(NMT) in the CyberCorp Scholarship for Service (SFS) class is to install OpenVAS
-on all machines that are used for security audits. At the time, simplicity was
-champion over the best architecture option: master/slave. 
+OpenVAS is an open source vulnerability scanner. In single instances, the
+OpenVAS package will install all the components required to successfully scan a
+network. But, some of those packages are resource intensive and difficult to run
+on older hardware. The current approach at New Mexico Institute of Mining and
+Technology (NMT) in the CyberCorp Scholarship for Service (SFS) class is to
+install the full OpenVAS package on all machines that are used for security
+audits. At the time, simplicity was champion over the best architecture option:
+master/slave. 
 
 The master/slave architecture allows all scans to be managed from a single
 location. While this does introduce a single point of failure, it also
@@ -18,17 +19,18 @@ simplifies the management of the security audit. All scans are returned to a
 single location where the students are able to analyze the results. This is a
 major improved compared to our previous distributed approach of students being
 responsible for specific subnets and machines. The old scheme was complicated
-because networks are rarely setup correctly and some machines would be on the
-same subnet, while others would accidentally be skipped. In addition, if
-anything happens to the machines before the students were able to grab the
-scans, we would not be able to use that data in our report. If the machine goes
-down while scanning, this architecture doesn't solve those problems, but if a
-machine is disconnected after a scan, this architecture automatically syncs the
-results back to the master.
+because client networks are rarely setup correctly and some machines would be on
+the same subnet, while others would accidentally be skipped. Getting all
+students, who are still learning about OpenVAS, on the same page resulted in a
+significant waste of time. In addition, if anything happens to the machines
+before the students were able to grab the scans, we would not be able to use
+that data in our report. If the machine goes down while scanning, this
+architecture doesn't solve those problems, but this architecture will
+automatically syncs the results back to the master after a scan is completed.
 
 ## Goals
 
-The goals of this project was to:
+The goals of this project include:
 - Learn more about OpenVAS and its architecture. OpenVAS is a monster of a
   project that I have not had time nor a reason to investigate further then
   getting it running on older hardware. 
@@ -41,12 +43,12 @@ The goals of this project was to:
 
 The structure of OpenVAS is displayed below:
 
-![OpenVAS Structure]({{ site.url }}/assets/posts/2019/11/22/OpenVAS-7-Structure.png)
+![OpenVAS Structure]({{ site.url }}/assets/posts/2019/11/22/OpenVAS-7-Structure.png){:width="700px"}
 
 *Source: https://en.wikipedia.org/wiki/File:OpenVAS-7-Structure.png*
 
-The image above is for OpenVAS 7 which is two versions old as of November 22,
-2019. The structure of OpenVAS has remained largely unchanged. 
+The image above is for OpenVAS 7 which is two versions old as of November 22, 2019. 
+The structure of OpenVAS has remained largely unchanged through the versions
 
 Originally, the scanner, manager, and Greenbone Security Assistant (GSA) were
 all installed on each machine that the security audit team used. Each component
@@ -123,7 +125,7 @@ communication channel without passwords being sent.
 
 ### Setting up the Master Node
 
-**Run all the following commands as root**
+*Run all the following commands as root*
 
 #### Setting up a CA
 
@@ -209,10 +211,10 @@ apt update; apt install -y openvas-scanner bzip2
 #### Creating Server Certificate
 
 Now we need to create and sign our slave certificates with our CA we created on
-the master. Following best practices, we will create the certificate on the
-slave and transfer the request to the master node. 
+the master. Following best practices, we will create the certificate signing
+request on the slave and transfer the request to the master node. 
 
-To create our certificates, we will use EasyRSA again:
+To create our certificate signing request, we will use EasyRSA again:
 ```
 wget https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.6/EasyRSA-unix-v3.0.6.tgz
 tar xzvf EasyRSA-unix-v3.0.6.tgz
@@ -229,7 +231,8 @@ And create our certificates:
 ./easyrsa gen-req SlaveServer nopass
 ```
 
-Now copy the `SlaveServer.req` file to the master and run ON THE MASTER NODE. Look carefully at the paths and adjust as needed:
+Now copy the `SlaveServer.req` file to the master and run ON THE MASTER NODE.
+Look carefully at the paths and adjust as needed:
 ```
 ./easyrsa import-req /path/to/req/file SlaveServer
 ./easyrsa sign-req server SlaveServer
@@ -239,7 +242,8 @@ Now copy the SlaveServer certificate file and the CA certificate back to the sla
 
 ### Installing the Certificates
 
-Now that we have the certificates, we need to install them for OpenVAS to work properly. These locations are the same for the master node.
+Now that we have the certificates, we need to install them for OpenVAS to work
+properly. These locations are the same for the master node.
 
 Now install the CA certificate. Look carefully at the paths and adjust as needed:
 ```
@@ -253,7 +257,6 @@ mkdir -p /var/lib/openvas/private/CA/
 cp /path/to/SlaveServer.crt /var/lib/openvas/CA/servercert.pem
 cp ~/EasyRSA-v3.0.6/pki/private/SlaveServer.key /var/lib/openvas/private/CA/serverkey.pem
 ```
-
 
 #### Editing OpenVAS-Scanner service files
 
@@ -312,7 +315,8 @@ You will have to now sync the NVT feeds with the scanner. One script to help is
 
 ### Signing into Greenbone Security Assistant
 
-First, we need to create an user account with the manager node. On the manager node, type:
+First, we need to create an user account with the manager node. On the manager
+node, type:
 
 ```
 openvasmd --create-user=admin
@@ -321,14 +325,14 @@ openvasmd --create-user=admin
 Save the password that is displayed. Go to `<your host>:9392` in your browser
 and sign into the service:
 
-![OpenVAS Sign in]({{ site.url }}/assets/posts/2019/11/22/openvas_signin.png)
+![OpenVAS Sign in]({{ site.url }}/assets/posts/2019/11/22/openvas_signin.png){:width="700px"}
 
 
 Now, go to Configuration->Scanners. This is where all the scanners will be
 listed. There will be a default of a localhost scanner. There will be a start
 icon, select it. Now you will be presented with the add scanner screen:
 
-![OpenVAS Scanner List]({{ site.url }}/assets/posts/2019/11/22/openvas_add_scanner.png)
+![OpenVAS Scanner List]({{ site.url }}/assets/posts/2019/11/22/openvas_add_scanner.png){:width="700px"}
 
 
 The Certificate/Private Key required uploads are the Client certificates that we
