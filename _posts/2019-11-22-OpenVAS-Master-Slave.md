@@ -42,7 +42,7 @@ The goals of this project was to:
 
 The structure of OpenVAS is displayed below:
 
-![OpenVAS Structure]({{ site.url }}/assets/2019/11/22/OpenVAS-7-Structure.png)
+![OpenVAS Structure]({{ site.url }}/assets/posts/2019/11/22/OpenVAS-7-Structure.png)
 
 *Source: https://en.wikipedia.org/wiki/File:OpenVAS-7-Structure.png*
 
@@ -322,14 +322,14 @@ openvasmd --create-user=admin
 Save the password that is displayed. Go to `<your host>:9392` in your browser
 and sign into the service:
 
-![OpenVAS Sign in]({{ site.url }}/assets/2019/11/22/openvas_signin.png)
+![OpenVAS Sign in]({{ site.url }}/assets/posts/2019/11/22/openvas_signin.png)
 
 
 Now, go to Configuration->Scanners. This is where all the scanners will be
 listed. There will be a default of a localhost scanner. There will be a start
 icon, select it. Now you will be presented with the add scanner screen:
 
-![OpenVAS Scanner List]({{ site.url }}/assets/2019/11/22/openvas_add_scanner.png)
+![OpenVAS Scanner List]({{ site.url }}/posts/assets/2019/11/22/openvas_add_scanner.png)
 
 
 The Certificate/Private Key required uploads are the Client certificates that we
