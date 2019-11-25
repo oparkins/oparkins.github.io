@@ -1,5 +1,5 @@
-layout: stacked
-style: light
+layout: sidebar
+style: dark
 
 plugins:
   - jekyll-octicons
@@ -28,22 +28,22 @@ projects:
     projects:
     # - repo-name
 
-# social_media:
+ social_media:
   # behance: your_username
   # dribbble: your_username
   # facebook: your_username
   # hackerrank: your_username
   # instagram: your_username
-  # keybase: your_username
+  keybase: oparkins
   # linkedin: your_username
   # mastodon: your_username
   # medium: your_username
   # stackoverflow: your_user_id
   # telegram: your_username
-  # twitter: your_username
+  twitter: nopesled
   # unsplash: your_username
   # vk: your_username
-  # website: http://your_website_url
+  website: https://oparkins.com
   # youtube: your_username
 
 topics:
