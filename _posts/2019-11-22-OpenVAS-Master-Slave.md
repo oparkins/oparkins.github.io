@@ -1,6 +1,5 @@
 ---
 title: "Setting up OpenVAS in Master and Slave Architecture"
-layout: page
 ---
 
 # Setting up OpenVAS in Master/Slave Architecture
