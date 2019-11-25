@@ -328,7 +328,7 @@ Now, go to Configuration->Scanners. This is where all the scanners will be
 listed. There will be a default of a localhost scanner. There will be a start
 icon, select it. Now you will be presented with the add scanner screen:
 
-![OpenVAS Scanner List]({{ site.url }}/posts/assets/2019/11/22/openvas_add_scanner.png)
+![OpenVAS Scanner List]({{ site.url }}/assets/posts/2019/11/22/openvas_add_scanner.png)
 
 
 The Certificate/Private Key required uploads are the Client certificates that we
