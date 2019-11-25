@@ -357,6 +357,24 @@ infrastructure.
 
 
 ## Implementation Suggestions
-- Using ssh to secure the call backs
+### Use SSH
 
+Currently, the master has to reach out to the slave to initiate the connection.
+While this is fine in a normal environment, it does not work well behind
+firewalls. Most firewalls allow outbound connections, so a common workaround
+when performing audits is to setup a reverse ssh tunnel. The same should be done
+for this architecture. The slave would initiate the ssh tunnel, and set it up
+properly. Then the master would connecting to the remote node, and the ssh
+tunnel would connect it to the master properly. 
+
+### Compile OpenVAS 
+
+Another option that should be explored is compiling OpenVAS from scratch. It
+appears that many problems arise when OpenVAS is retrieved from the repositories
+of the distribution. It appears that the individuals who compiled OpenVAS have
+some assumptions in how OpenVAS will be used, so it causes issues when other
+architectures are attempted. This was evident when writing this tutorial. I
+tried several different workarounds for various problems, but it appeared that
+various applications would not use configuration files. By compiling OpenVAS
+yourself, you use your own assumptions which might make some of this easier.
 
