@@ -322,7 +322,7 @@ node, type:
 openvasmd --create-user=admin
 ```
 
-Save the password that is displayed. Go to `<your host>:9392` in your browser
+Save the password that is displayed. Go to `https://<your host>:9392` in your browser
 and sign into the service:
 
 ![OpenVAS Sign in]({{ site.url }}/assets/posts/2019/11/22/openvas_signin.png){:width="700px"}
