@@ -10,8 +10,8 @@ left all the work to the reader to complete. You can find the original article
 [here](https://oparkins.github.io/2019/11/22/OpenVAS-Master-Slave/). 
 
 Recently, I had to create an Ansible script to setup the architecture
-automatically for security audits. The scripts can be found on my GitHub at
-https://github.com/oparkins/ignition-key.security-audit
+automatically for security audits. The scripts can be found at 
+[github/oparkins/ignition-key.security-audit](https://github.com/oparkins/ignition-key.security-audit)
 
 But the scripts don't only setup OpenVAS automatically, they also setup a SSH
 Certificate system. SSH Certificates are beautiful and I wish more people used
