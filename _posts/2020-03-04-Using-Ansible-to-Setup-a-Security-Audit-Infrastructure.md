@@ -34,7 +34,7 @@ organizations.
 
 ## Cool Features
 
-An overview of the really cool features (in my opinion) are:
+An overview of the really cool features are:
 - Automatic setup of OpenVAS Master/Slave
 	- The slaves are automatically added to the master
 - SSH Certificate Setup
@@ -111,7 +111,7 @@ reduces the burden of connecting to new services on students.
 
 ## Conclusion
 
-I have very proud of the Ansible scripts that have been created. It was a
+I am very proud of the Ansible scripts that have been created. It was a
 combination of OpenVAS, SSH Certificates, and more that made it worth while. If
 there are any questions or concerns, start a GitHub issue. Feel free to add
 other important tools to the remote machine configurations and create a pull
