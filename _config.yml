@@ -47,3 +47,9 @@ social_media:
   # youtube: your_username
 
 theme: jekyll-theme-midnight
+
+plugins:
+  - jekyll-feed
+title: Owen Parkins' Blog
+description: Owen Parkins' Random Thoughts and Useful Tips
+author: Owen Parkins
